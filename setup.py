@@ -7,7 +7,7 @@ setup(
     version=VERSION,
     packages=find_packages('src'),
     package_dir={
-        '': 'source'
+        '': 'src'
     },
     description='Finite State fork of minimized FACT_core repo',
     author='Finite State',
