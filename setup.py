@@ -6,6 +6,9 @@ setup(
     name='fact_minimal',
     version=VERSION,
     packages=find_packages('src'),
+    package_dir={
+        '': 'source'
+    },
     description='Finite State fork of minimized FACT_core repo',
     author='Finite State',
     author_email='',
