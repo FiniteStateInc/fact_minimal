@@ -71,3 +71,4 @@ if __name__ == '__main__':
     analysis_service.shutdown()
     if not args.testing:
         complete_shutdown()
+
