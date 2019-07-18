@@ -9,6 +9,7 @@ setup(
     package_dir={
         '': 'src'
     },
+    package_data={'analysis': ['signatures/*.yc']},
     description='Finite State fork of minimized FACT_core repo',
     author='Finite State',
     author_email='',
