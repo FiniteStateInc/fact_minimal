@@ -9,7 +9,9 @@ from common_helper_files import get_dir_of_file
 from analysis.PluginBase import AnalysisBasePlugin
 from common_analysis_ip_and_uri_finder import CommonAnalysisIPAndURIFinder, ip_and_uri_finder_analysis
 
-geoip_database_path = os.path.join(get_dir_of_file(__file__), '../bin/GeoLite2-City/GeoLite2-City.mmdb')
+geoip_database_path = os.environ.get('GEOLITE2_DB_PATH')
+if geoip_database_path is None:
+    geoip_database_path = os.path.join(get_dir_of_file(__file__), '../bin/GeoLite2-City/GeoLite2-City.mmdb')
 
 
 class AnalysisPlugin(AnalysisBasePlugin):
