@@ -39,8 +39,17 @@ class AnalysisPlugin(AnalysisBasePlugin):
                 file_object.processed_analysis[self.NAME][h] = get_hash(h, file_object.binary)
             else:
                 logging.debug('algorithm {} not available'.format(h))
-        file_object.processed_analysis[self.NAME]['ssdeep'] = get_ssdeep(file_object.binary)
-        file_object.processed_analysis[self.NAME]['imphash'] = get_imphash(file_object)
+
+        # Skip these always-on FACT algos if we don't specifically request them.
+        #
+        # Glue tables (or any stray calls to the FACT compare plugin or storage)
+        # may expect these so always add the keys and just skip the value.
+        always_on_algos = [('ssdeep', get_ssdeep), ('imphash', get_imphash)]
+        for algo_name, get_value_func in always_on_algos:
+            algo_value = None  # default
+            if algo_name in self.hashes_to_create:
+                algo_value = get_value_func(file_object.binary)
+            file_object.processed_analysis[self.NAME][algo_name] = algo_value
         return file_object
 
     def _get_hash_list_from_config(self):
